@@ -2,7 +2,7 @@ import polyfill from "../packages/excalidraw/polyfill";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "../packages/excalidraw/analytics";
-import { getDefaultAppState } from "../packages/excalidraw/appState";
+// import { getDefaultAppState } from "../packages/excalidraw/appState";
 import { ErrorDialog } from "../packages/excalidraw/components/ErrorDialog";
 import { TopErrorBoundary } from "./components/TopErrorBoundary";
 import {
@@ -44,7 +44,7 @@ import {
   preventUnload,
   ResolvablePromise,
   resolvablePromise,
-  isRunningInIframe,
+  // isRunningInIframe,
 } from "../packages/excalidraw/utils";
 import {
   FIREBASE_STORAGE_PREFIXES,
@@ -59,7 +59,7 @@ import Collab, {
   isOfflineAtom,
 } from "./collab/Collab";
 import {
-  exportToBackend,
+  // exportToBackend,
   getCollaborationLinkData,
   isCollaborationLink,
   loadScene,
@@ -76,7 +76,7 @@ import {
   RestoredDataState,
 } from "../packages/excalidraw/data/restore";
 import {
-  ExportToExcalidrawPlus,
+  // ExportToExcalidrawPlus,
   exportToExcalidrawPlus,
 } from "./components/ExportToExcalidrawPlus";
 import { updateStaleImageStatuses } from "./data/FileManager";
@@ -281,7 +281,8 @@ export const appLangCodeAtom = atom(
 const ExcalidrawWrapper = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [langCode, setLangCode] = useAtom(appLangCodeAtom);
-  const isCollabDisabled = isRunningInIframe();
+  // const isCollabDisabled = isRunningInIframe();
+  const isCollabDisabled = true;
 
   // initial state
   // ---------------------------------------------------------------------------
@@ -564,6 +565,8 @@ const ExcalidrawWrapper = () => {
     if (collabAPI?.isCollaborating()) {
       collabAPI.syncElements(elements);
     }
+    // TODO: here, send the contents of the file to the raspberry pi, after connecting to it.
+    // console.log(elements);
 
     setTheme(appState.theme);
 
@@ -603,44 +606,44 @@ const ExcalidrawWrapper = () => {
     null,
   );
 
-  const onExportToBackend = async (
-    exportedElements: readonly NonDeletedExcalidrawElement[],
-    appState: Partial<AppState>,
-    files: BinaryFiles,
-    canvas: HTMLCanvasElement,
-  ) => {
-    if (exportedElements.length === 0) {
-      throw new Error(t("alerts.cannotExportEmptyCanvas"));
-    }
-    if (canvas) {
-      try {
-        const { url, errorMessage } = await exportToBackend(
-          exportedElements,
-          {
-            ...appState,
-            viewBackgroundColor: appState.exportBackground
-              ? appState.viewBackgroundColor
-              : getDefaultAppState().viewBackgroundColor,
-          },
-          files,
-        );
+  // const onExportToBackend = async (
+  //   exportedElements: readonly NonDeletedExcalidrawElement[],
+  //   appState: Partial<AppState>,
+  //   files: BinaryFiles,
+  //   canvas: HTMLCanvasElement,
+  // ) => {
+  //   if (exportedElements.length === 0) {
+  //     throw new Error(t("alerts.cannotExportEmptyCanvas"));
+  //   }
+  //   if (canvas) {
+  //     try {
+  //       const { url, errorMessage } = await exportToBackend(
+  //         exportedElements,
+  //         {
+  //           ...appState,
+  //           viewBackgroundColor: appState.exportBackground
+  //             ? appState.viewBackgroundColor
+  //             : getDefaultAppState().viewBackgroundColor,
+  //         },
+  //         files,
+  //       );
 
-        if (errorMessage) {
-          throw new Error(errorMessage);
-        }
+  //       if (errorMessage) {
+  //         throw new Error(errorMessage);
+  //       }
 
-        if (url) {
-          setLatestShareableLink(url);
-        }
-      } catch (error: any) {
-        if (error.name !== "AbortError") {
-          const { width, height } = canvas;
-          console.error(error, { width, height });
-          throw new Error(error.message);
-        }
-      }
-    }
-  };
+  //       if (url) {
+  //         setLatestShareableLink(url);
+  //       }
+  //     } catch (error: any) {
+  //       if (error.name !== "AbortError") {
+  //         const { width, height } = canvas;
+  //         console.error(error, { width, height });
+  //         throw new Error(error.message);
+  //       }
+  //     }
+  //   }
+  // };
 
   const renderCustomStats = (
     elements: readonly NonDeletedExcalidrawElement[],
@@ -701,30 +704,30 @@ const ExcalidrawWrapper = () => {
         UIOptions={{
           canvasActions: {
             toggleTheme: true,
-            export: {
-              onExportToBackend,
-              renderCustomUI: (elements, appState, files) => {
-                return (
-                  <ExportToExcalidrawPlus
-                    elements={elements}
-                    appState={appState}
-                    files={files}
-                    onError={(error) => {
-                      excalidrawAPI?.updateScene({
-                        appState: {
-                          errorMessage: error.message,
-                        },
-                      });
-                    }}
-                    onSuccess={() => {
-                      excalidrawAPI?.updateScene({
-                        appState: { openDialog: null },
-                      });
-                    }}
-                  />
-                );
-              },
-            },
+            // export: {
+            //   onExportToBackend,
+            //   renderCustomUI: (elements, appState, files) => {
+            //     return (
+            //       <ExportToExcalidrawPlus
+            //         elements={elements}
+            //         appState={appState}
+            //         files={files}
+            //         onError={(error) => {
+            //           excalidrawAPI?.updateScene({
+            //             appState: {
+            //               errorMessage: error.message,
+            //             },
+            //           });
+            //         }}
+            //         onSuccess={() => {
+            //           excalidrawAPI?.updateScene({
+            //             appState: { openDialog: null },
+            //           });
+            //         }}
+            //       />
+            //     );
+            //   },
+            // },
           },
         }}
         langCode={langCode}

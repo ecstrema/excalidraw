@@ -9,6 +9,8 @@ import {
   RectangleIcon,
   SelectionIcon,
   TextIcon,
+  frameToolIcon,
+  laserPointerToolIcon,
 } from "./components/icons";
 import { KEYS } from "./keys";
 
@@ -82,6 +84,20 @@ export const SHAPES = [
     key: KEYS.E,
     numericKey: KEYS["0"],
     fillable: false,
+  },
+  {
+    icon: laserPointerToolIcon,
+    value: "laser",
+    key: KEYS.K,
+    fillable: false,
+    numericKey: null,
+  },
+  {
+    icon: frameToolIcon,
+    value: "frame",
+    key: KEYS.F.toLocaleUpperCase(),
+    fillable: false,
+    numericKey: null,
   },
 ] as const;
 
