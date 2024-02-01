@@ -29,7 +29,7 @@ export class LaserTrails implements Trail {
       simplify: 0,
       streamline: 0.4,
       sizeMapping: (c) => {
-        const DECAY_TIME = 1000;
+        const DECAY_TIME = 200;
         const DECAY_LENGTH = 50;
         const t = Math.max(
           0,
@@ -42,6 +42,7 @@ export class LaserTrails implements Trail {
 
         return Math.min(easeOut(l), easeOut(t));
       },
+      keepHead: true,
     } as Partial<LaserPointerOptions>;
   }
 
