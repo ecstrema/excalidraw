@@ -92,8 +92,13 @@ export const SelectedShapeActions = ({
     }
   }
 
+  const oneFrameSelected = true;
+  // const oneFrameSelected = targetElements.length === 1 && commonSelectedType === "frame";
+
   return (
     <div className="panelColumn">
+      {oneFrameSelected && renderAction("sendToDevice")}
+
       <div>
         {((hasStrokeColor(appState.activeTool.type) &&
           appState.activeTool.type !== "image" &&

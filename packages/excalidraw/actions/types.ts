@@ -124,6 +124,7 @@ export type ActionName =
   | "setFrameAsActiveTool"
   | "setEmbeddableAsActiveTool"
   | "createContainerFromText"
+  | "sendToDevice"
   | "wrapTextInContainer";
 
 export type PanelComponentProps = {

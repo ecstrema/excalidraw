@@ -40,6 +40,8 @@ export {
   actionLoadScene,
 } from "./actionExport";
 
+export { actionSendToDevice } from "./actionSendToDevice";
+
 export { actionCopyStyles, actionPasteStyles } from "./actionStyles";
 export {
   actionToggleCanvasMenu,

@@ -177,6 +177,15 @@ export const LockedIcon = createIcon(
   modifiedTablerIconProps,
 );
 
+// tabler-icons: send
+export const SendIcon = createIcon(
+  <path
+    d="M10 14L21 3m0 0l-6.5 18a.55.55 0 0 1-1 0L10 14l-7-3.5a.55.55 0 0 1 0-1z"
+    transform="scale(0.83333, 0.83333)"
+  />,
+  modifiedTablerIconProps,
+);
+
 // custom
 export const WelcomeScreenMenuArrow = createIcon(
   <>
