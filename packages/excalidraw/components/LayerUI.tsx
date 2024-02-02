@@ -201,10 +201,7 @@ const LayerUI = ({
   };
 
   const renderConnectToDeviceDialog = () => {
-    if (
-      !UIOptions.canvasActions.saveAsImage ||
-      appState.openDialog?.name !== "connectToDevice"
-    ) {
+    if (appState.openDialog?.name !== "connectToDevice") {
       return null;
     }
 
