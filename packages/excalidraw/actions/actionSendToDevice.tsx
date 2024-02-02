@@ -12,7 +12,11 @@ export const actionSendToDevice = register({
     return {
       appState: {
         ...appState,
-        toast: { message: t("toast.fileSaved") },
+        openDialog: { name: "connectToDevice" },
+        // TODO: translate
+        // TODO: send to device
+        // TODO: this should probably be a super evident button on the bottom of the screen, instead of this hidden button.
+        // toast: { message: "TODO: send to device" },
       },
       commitToHistory: false,
     };

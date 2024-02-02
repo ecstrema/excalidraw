@@ -23,6 +23,7 @@ import { capitalizeString, isShallowEqual } from "../utils";
 import { SelectedShapeActions, ShapesSwitcher } from "./Actions";
 import { ErrorDialog } from "./ErrorDialog";
 import { ImageExportDialog } from "./ImageExportDialog";
+import { ConnectToDeviceDialog } from "./ConnectToDeviceDialog";
 import { FixedSideContainer } from "./FixedSideContainer";
 import { HintViewer } from "./HintViewer";
 import { Island } from "./Island";
@@ -194,6 +195,21 @@ const LayerUI = ({
         files={files}
         actionManager={actionManager}
         onExportImage={onExportImage}
+        onCloseRequest={() => setAppState({ openDialog: null })}
+      />
+    );
+  };
+
+  const renderConnectToDeviceDialog = () => {
+    if (
+      !UIOptions.canvasActions.saveAsImage ||
+      appState.openDialog?.name !== "connectToDevice"
+    ) {
+      return null;
+    }
+
+    return (
+      <ConnectToDeviceDialog
         onCloseRequest={() => setAppState({ openDialog: null })}
       />
     );
@@ -466,6 +482,8 @@ const LayerUI = ({
           }}
         />
       )}
+      {appState.openDialog?.name === "connectToDevice" &&
+        renderConnectToDeviceDialog()}
       {appState.openDialog?.name === "settings" && (
         <MagicSettings
           openAIKey={openAIKey}

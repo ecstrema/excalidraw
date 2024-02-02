@@ -256,7 +256,7 @@ export interface AppState {
   openSidebar: { name: SidebarName; tab?: SidebarTabName } | null;
   openDialog:
     | null
-    | { name: "imageExport" | "help" | "jsonExport" }
+  | { name: "imageExport" | "help" | "jsonExport" | "connectToDevice" }
     | {
         name: "settings";
         source:
