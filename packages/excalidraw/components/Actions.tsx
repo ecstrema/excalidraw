@@ -44,6 +44,7 @@ import {
 } from "./icons";
 import { KEYS } from "../keys";
 import { useTunnels } from "../context/tunnels";
+import { getContainingFrame } from "../frame";
 
 export const SelectedShapeActions = ({
   appState,
@@ -92,8 +93,13 @@ export const SelectedShapeActions = ({
     }
   }
 
-  const oneFrameSelected = true;
-  // const oneFrameSelected = targetElements.length === 1 && commonSelectedType === "frame";
+  // If the element is a frame, or if it is contained within a frame, we show
+  // the "send to device" action.
+  // We will in that case send contents of the frame to the device.
+  const oneFrameSelected =
+    targetElements.length === 1 &&
+    (commonSelectedType === "frame" ||
+      getContainingFrame(targetElements[0], elementsMap));
 
   return (
     <div className="panelColumn">
