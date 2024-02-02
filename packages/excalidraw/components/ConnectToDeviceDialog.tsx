@@ -1,3 +1,4 @@
+import { t } from "../i18n";
 import { Dialog } from "./Dialog";
 import DialogActionButton from "./DialogActionButton";
 
@@ -23,7 +24,7 @@ export const ConnectToDeviceDialog = ({
           label="Connect device" // TODO: translate
         />
         <DialogActionButton
-          label="Cancel" // TODO: translate
+          label={t("buttons.cancel")} // TODO: translate
           onClick={onCloseRequest}
         />
       </div>
