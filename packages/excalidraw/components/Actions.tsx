@@ -69,16 +69,18 @@ export const SelectedShapeActions = ({
   const device = useDevice();
   const isRTL = document.documentElement.getAttribute("dir") === "rtl";
 
-  const showFillIcons =
-    (hasBackground(appState.activeTool.type) &&
-      !isTransparent(appState.currentItemBackgroundColor)) ||
-    targetElements.some(
-      (element) =>
-        hasBackground(element.type) && !isTransparent(element.backgroundColor),
-    );
-  const showChangeBackgroundIcons =
-    hasBackground(appState.activeTool.type) ||
-    targetElements.some((element) => hasBackground(element.type));
+  const showFillIcons = false;
+  // const showFillIcons =
+  //   (hasBackground(appState.activeTool.type) &&
+  //     !isTransparent(appState.currentItemBackgroundColor)) ||
+  //   targetElements.some(
+  //     (element) =>
+  //       hasBackground(element.type) && !isTransparent(element.backgroundColor),
+  //   );
+  const showChangeBackgroundIcons = false;
+  // const showChangeBackgroundIcons =
+  //   hasBackground(appState.activeTool.type) ||
+  //   targetElements.some((element) => hasBackground(element.type));
 
   const showLinkIcon =
     targetElements.length === 1 || isSingleElementBoundContainer;
