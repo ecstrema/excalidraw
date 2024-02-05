@@ -7079,6 +7079,7 @@ class App extends React.Component<AppProps, AppState> {
           frameToHighlight:
             topLayerFrame && !selectedElementsHasAFrame ? topLayerFrame : null,
         });
+        console.log(this.state);
 
         // Marking that click was used for dragging to check
         // if elements should be deselected on pointerup
