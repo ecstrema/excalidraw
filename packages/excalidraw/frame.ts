@@ -29,6 +29,7 @@ import {
 } from "../utils/export";
 import { isFrameElement, isFrameLikeElement } from "./element/typeChecks";
 import { ReadonlySetLike } from "./utility-types";
+import { t } from "./i18n";
 
 // --------------------------- Frame State ------------------------------------
 export const bindElementsToFramesAfterDuplication = (
@@ -749,7 +750,7 @@ export const getFrameLikeTitle = (
   // TODO name frames "AI" only if specific to AI frames
   return element.name === null
     ? isFrameElement(element)
-      ? `Frame ${frameIdx}`
+      ? t("labels.defaultFrameText") + frameIdx
       : `AI Frame $${frameIdx}`
     : element.name;
 };
