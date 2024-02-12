@@ -95,7 +95,7 @@ export const SHAPES = [
   {
     icon: frameToolIcon,
     value: "frame",
-    key: KEYS.F.toLocaleUpperCase(),
+    key: KEYS.B,
     fillable: false,
     numericKey: null,
   },

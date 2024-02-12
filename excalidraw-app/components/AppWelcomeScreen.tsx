@@ -48,6 +48,7 @@ export const AppWelcomeScreen: React.FC<{
           {headingContent}
         </WelcomeScreen.Center.Heading>
         <WelcomeScreen.Center.Menu>
+          <WelcomeScreen.Center.MenuItemCreateFrame />
           <WelcomeScreen.Center.MenuItemLoadScene />
           <WelcomeScreen.Center.MenuItemHelp />
           {/* {props.isCollabEnabled && (

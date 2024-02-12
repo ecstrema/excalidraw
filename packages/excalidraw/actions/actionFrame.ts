@@ -134,5 +134,5 @@ export const actionSetFrameAsActiveTool = register({
     !event[KEYS.CTRL_OR_CMD] &&
     !event.shiftKey &&
     !event.altKey &&
-    event.key.toLocaleLowerCase() === KEYS.F,
+    event.key.toLocaleLowerCase() === KEYS.B,
 });

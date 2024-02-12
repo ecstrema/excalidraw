@@ -11,13 +11,12 @@ import {
   canChangeRoundness,
   canHaveArrowheads,
   getTargetElements,
-  hasBackground,
   hasStrokeStyle,
   hasStrokeWidth,
 } from "../scene";
 import { SHAPES } from "../shapes";
 import { AppClassProperties, AppProps, UIAppState, Zoom } from "../types";
-import { capitalizeString, isTransparent } from "../utils";
+import { capitalizeString } from "../utils";
 import Stack from "./Stack";
 import { ToolButton } from "./ToolButton";
 import { hasStrokeColor } from "../scene/comparisons";
@@ -32,17 +31,6 @@ import {
 } from "../element/textElement";
 
 import "./Actions.scss";
-import DropdownMenu from "./dropdownMenu/DropdownMenu";
-import {
-  EmbedIcon,
-  extraToolsIcon,
-  frameToolIcon,
-  mermaidLogoIcon,
-  laserPointerToolIcon,
-  OpenAIIcon,
-  MagicIcon,
-} from "./icons";
-import { KEYS } from "../keys";
 import { useTunnels } from "../context/tunnels";
 import { getContainingFrame } from "../frame";
 
@@ -243,13 +231,13 @@ export const ShapesSwitcher = ({
   app: AppClassProperties;
   UIOptions: AppProps["UIOptions"];
 }) => {
-  const [isExtraToolsMenuOpen, setIsExtraToolsMenuOpen] = useState(false);
+  // const [isExtraToolsMenuOpen, setIsExtraToolsMenuOpen] = useState(false);
 
-  const frameToolSelected = activeTool.type === "frame";
-  const laserToolSelected = activeTool.type === "laser";
-  const embeddableToolSelected = activeTool.type === "embeddable";
+  // const frameToolSelected = activeTool.type === "frame";
+  // const laserToolSelected = activeTool.type === "laser";
+  // const embeddableToolSelected = activeTool.type === "embeddable";
 
-  const { TTDDialogTriggerTunnel } = useTunnels();
+  // const { TTDDialogTriggerTunnel } = useTunnels();
 
   return (
     <>
@@ -265,9 +253,14 @@ export const ShapesSwitcher = ({
         const label = t(`toolBar.${value}`);
         const letter =
           key && capitalizeString(typeof key === "string" ? key : key[0]);
-        const shortcut = letter
-          ? `${letter} ${t("helpDialog.or")} ${numericKey}`
-          : `${numericKey}`;
+        const shortcut =
+          letter && numericKey
+            ? `${letter} ${t("helpDialog.or")} ${numericKey}`
+            : letter
+              ? letter
+              : numericKey
+                ? numericKey
+                : "";
         return (
           <ToolButton
             className={clsx("Shape", { fillable })}
@@ -328,7 +321,7 @@ export const ShapesSwitcher = ({
           <DropdownMenu.Item
             onSelect={() => app.setActiveTool({ type: "frame" })}
             icon={frameToolIcon}
-            shortcut={KEYS.F.toLocaleUpperCase()}
+            shortcut={KEYS.B.toLocaleUpperCase()}
             data-testid="toolbar-frame"
             selected={frameToolSelected}
           >

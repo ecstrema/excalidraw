@@ -3,9 +3,11 @@ import { getShortcutFromShortcutName } from "../../actions/shortcuts";
 import { t, useI18n } from "../../i18n";
 import { useDevice, useExcalidrawActionManager } from "../App";
 import { useTunnels } from "../../context/tunnels";
-import { HelpIcon, LoadIcon, usersIcon } from "../icons";
+import { HelpIcon, LoadIcon, frameToolIcon, usersIcon } from "../icons";
 import { useUIAppState } from "../../context/ui-appState";
 import { ExcalidrawLogo } from "../ExcalidrawLogo";
+import { actionSetFrameAsActiveTool } from "../../actions/actionFrame";
+import { getShortcutKey } from "../../utils";
 
 const WelcomeScreenMenuItemContent = ({
   icon,
@@ -96,6 +98,7 @@ const Center = ({ children }: { children?: React.ReactNode }) => {
             <Logo />
             <Heading>{t("welcomeScreen.defaults.center_heading")}</Heading>
             <Menu>
+              <MenuItemCreateFrame />
               <MenuItemLoadScene />
               <MenuItemHelp />
             </Menu>
@@ -145,6 +148,26 @@ const MenuItemHelp = () => {
 };
 MenuItemHelp.displayName = "MenuItemHelp";
 
+const MenuItemCreateFrame = () => {
+  const appState = useUIAppState();
+  const actionManager = useExcalidrawActionManager();
+
+  if (appState.viewModeEnabled) {
+    return null;
+  }
+
+  return (
+    <WelcomeScreenMenuItem
+      onSelect={() => actionManager.executeAction(actionSetFrameAsActiveTool)}
+      shortcut={getShortcutKey("B")}
+      icon={frameToolIcon}
+    >
+      {t("toolBar.frame")}
+    </WelcomeScreenMenuItem>
+  );
+};
+MenuItemCreateFrame.displayName = "MenuItemCreateFrame";
+
 const MenuItemLoadScene = () => {
   const appState = useUIAppState();
   const actionManager = useExcalidrawActionManager();
@@ -189,6 +212,7 @@ Center.MenuItem = WelcomeScreenMenuItem;
 Center.MenuItemLink = WelcomeScreenMenuItemLink;
 Center.MenuItemHelp = MenuItemHelp;
 Center.MenuItemLoadScene = MenuItemLoadScene;
+Center.MenuItemCreateFrame = MenuItemCreateFrame;
 Center.MenuItemLiveCollaborationTrigger = MenuItemLiveCollaborationTrigger;
 
 export { Center };
